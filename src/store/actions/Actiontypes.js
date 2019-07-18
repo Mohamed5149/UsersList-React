@@ -1,0 +1,4 @@
+export const INITUSERS = 'INITUSERS';
+export const CHANGEPAGE = 'CHANGEPAGE';
+export const INCREASEPAGE = 'INCREASEPAGE';
+export const DECREASEPAGE = 'DECREASEPAGE';
