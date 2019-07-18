@@ -1,0 +1,9 @@
+.paging{
+    list-style: none;
+    margin-left: 70rem;
+}
+.paging li{
+    display: inline-block;
+    padding-left: 20%;
+    font-size: 1.5rem;
+}

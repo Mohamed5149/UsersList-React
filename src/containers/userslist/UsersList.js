@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { MessageBox, Message } from 'element-react';
 import classes from './UsersList.module.css';
 import * as actionCreators from '../../store/actions/Actioncreators';
 import UserCard from '../../components/usercard/User-Card';
@@ -9,6 +10,31 @@ class UsersList extends Component {
 
     componentDidMount() {
         this.props.get();
+    }
+
+    onEditHandler(id) {
+        this.props.history.push(`/Edituser/${id}`);
+    }
+
+    onDeleteHandler(id) {
+        MessageBox.confirm('This user will be permanently deleted. Continue?', 'Warning', {
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel',
+            type: 'warning'
+        }).then(() => {
+            this.props.delete(id);
+            Message({
+                type: 'success',
+                message: 'Delete completed!',
+                duration:1500
+            });
+        }).catch(() => {
+            Message({
+                type: 'info',
+                message: 'Delete canceled',
+                duration:1500
+            });
+        });
     }
 
     render() {
@@ -25,6 +51,9 @@ class UsersList extends Component {
                         email={user.email}
                         phone={user.phone}
                         status={user.status}
+                        role={user.role}
+                        edit={() => this.onEditHandler(user.id)}
+                        delete={() => this.onDeleteHandler(user.id)}
                     ></UserCard>
                 </div>
             )
@@ -59,6 +88,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         get: () => dispatch(actionCreators.InitUsers()),
+        delete: (id) => dispatch(actionCreators.deleteUser(id)),
         change: (page) => dispatch(actionCreators.Changepage(page)),
         increase: () => dispatch(actionCreators.Increasepage),
         decrease: () => dispatch(actionCreators.Decreasepage),

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
 
 const Header = (props) => {
     return (
@@ -11,22 +10,11 @@ const Header = (props) => {
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/">Home</Link>
-                    </li>
                     <li className="nav-item active">
-                        <Link className="nav-link" to="/users">Users</Link>
+                        <Link className="nav-link" to="/Users">Users</Link>
                     </li>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
-                            <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">Something else here</a>
-                        </div>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/Adduser">Add New User</Link>
                     </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0">

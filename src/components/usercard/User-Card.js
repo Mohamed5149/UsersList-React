@@ -9,9 +9,10 @@ const UserCard = (props) => {
             <div className="text item"><span>Email: </span>{props.email}</div>
             <div className="text item"><span>Phone No: </span>{props.phone}</div>
             <div className="text item"><span>Status: </span>{props.status}</div>
+            <div className="text item"><span>Role: </span>{props.role}</div>
             <hr></hr>
-            <Button plain={true} type="primary">Edit</Button>
-            <Button plain={true} type="danger">Delete</Button>
+            <Button onClick={props.edit} plain={true} type="primary">Edit</Button>
+            <Button onClick={props.delete} plain={true} type="danger">Delete</Button>
         </Card>
     )
 }

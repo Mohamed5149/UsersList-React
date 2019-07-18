@@ -7,45 +7,28 @@ const initialState =
         name: "ahmed",
         email: "a@test.com",
         phone: 4353453543,
-        status: "active"
+        status: "Active",
+        role: "User"
     },
     {
         name: "omar",
         id: 2,
         email: "a@test.com",
         phone: 372636722,
-        status: "active"
+        status: "Active",
+        role: "User"
     },
     {
         name: "ali",
         id: 3,
         email: "c@test.com",
         phone: 82736,
-        status: "soft_deleted"
-    }, {
-        id: 4,
-        name: "ahmed",
-        email: "a@test.com",
-        phone: 4353453543,
-        status: "active"
-    },
-    {
-        name: "omar",
-        id: 5,
-        email: "a@test.com",
-        phone: 372636722,
-        status: "active"
-    },
-    {
-        name: "ali",
-        id: 6,
-        email: "c@test.com",
-        phone: 82736,
-        status: "soft_deleted"
+        status: "Soft_Deleted",
+        role: "User"
     }
     ],
     currentPage: 1,
-    usersPerPage: 2
+    usersPerPage: 3
 }
 
 const reducer = (state = initialState, action) => {
@@ -55,6 +38,36 @@ const reducer = (state = initialState, action) => {
                 ...state
             }
 
+        case actionTypes.SAVEUSER:
+            let usersCopy = [...state.users];
+            let user = {};
+            user = action.user;
+            user.id = usersCopy.length + 1;
+            usersCopy.push(user);
+            return {
+                ...state,
+                users: usersCopy
+            }
+
+        case actionTypes.EDITUSER:
+            let usersC = [...state.users];
+            let userIndex = usersC.findIndex(user => user.id == action.user.id);
+            usersC[userIndex] = { ...action.user };
+            return {
+                ...state,
+                users: usersC
+            }
+
+        case actionTypes.DELETEUSER:
+            let usersCopyDeletion = [...state.users];
+            let userIndexDeletion = usersCopyDeletion.findIndex(user => user.id === action.userId)
+            usersCopyDeletion.splice(userIndexDeletion,1);
+
+            return{
+                ...state,
+                users:usersCopyDeletion
+            }
+            
         case actionTypes.CHANGEPAGE:
             return {
                 ...state,
