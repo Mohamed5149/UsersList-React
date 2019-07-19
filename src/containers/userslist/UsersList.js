@@ -7,8 +7,13 @@ import UserCard from '../../components/usercard/User-Card';
 import Paging from '../../components/paging/Paging';
 
 class UsersList extends Component {
+    state = {
+        role: ''
+    }
 
     componentDidMount() {
+        const role = localStorage.getItem('userRole');
+        this.setState({role:role})
         this.props.get();
     }
 
@@ -26,13 +31,13 @@ class UsersList extends Component {
             Message({
                 type: 'success',
                 message: 'Delete completed!',
-                duration:1500
+                duration: 1500
             });
         }).catch(() => {
             Message({
                 type: 'info',
                 message: 'Delete canceled',
-                duration:1500
+                duration: 1500
             });
         });
     }
@@ -47,8 +52,10 @@ class UsersList extends Component {
             return (
                 <div key={user.id}>
                     <UserCard
+                        userRole={this.state.role}
                         name={user.name}
                         email={user.email}
+                        password={user.password}
                         phone={user.phone}
                         status={user.status}
                         role={user.role}

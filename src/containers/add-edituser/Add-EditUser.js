@@ -18,6 +18,11 @@ class AddUser extends Component {
                 isValid: false,
                 isTouched: false
             },
+            password: {
+                value: '',
+                isValid: '',
+                isTouched: ''
+            },
             phone: {
                 value: '',
                 isValid: false,
@@ -82,6 +87,7 @@ class AddUser extends Component {
         let user = {};
         user.name = this.state.formData.name.value;
         user.email = this.state.formData.email.value;
+        user.password = this.state.formData.password.value;
         user.phone = this.state.formData.phone.value;
         user.status = this.state.formData.status.value;
         user.role = this.state.formData.role.value;
@@ -94,6 +100,7 @@ class AddUser extends Component {
             user.id = userId;
             this.props.edit(user);
         }
+        this.open()
         this.props.history.push(`/Users`);
     }
 
@@ -101,14 +108,16 @@ class AddUser extends Component {
         let emailErrorMessage;
         let nameErrorMessage;
         let phoneErrorMessage;
+        let passwordErrorMessage;
 
         if (this.state.formData.email.isValid === false && this.state.formData.email.isTouched === true) { emailErrorMessage = <span className={classes.error}>Wrong Data</span> }
         if (this.state.formData.name.isValid === false && this.state.formData.name.isTouched === true) { nameErrorMessage = <span className={classes.error}>Required</span> }
         if (this.state.formData.phone.isValid === false && this.state.formData.phone.isTouched === true) { phoneErrorMessage = <span className={classes.error}>Required</span> }
+        if (this.state.formData.password.isValid === false && this.state.formData.password.isTouched === true) { passwordErrorMessage = <span className={classes.error}>Required</span> }
 
         let enableFormButton;
         if (this.state.formData.email.isValid && this.state.formData.name.isValid && this.state.formData.phone.isValid &&
-            this.state.formData.status.isValid && this.state.formData.role.isValid) {
+            this.state.formData.status.isValid && this.state.formData.role.isValid && this.state.formData.password.isValid) {
             enableFormButton = true;
         }
 
@@ -122,7 +131,8 @@ class AddUser extends Component {
                     </div>
                     <div className="form-group col-md-6">
                         <label htmlFor="inputPassword4">Password</label>
-                        <input type="password" className="form-control" id="inputPassword4" placeholder="Password" />
+                        <input value={this.state.formData.password.value} onChange={(e) => { this.onChangeHandler("password", e.target.value) }} type="password" className="form-control" id="inputPassword4" placeholder="Password" />
+                        {passwordErrorMessage}
                     </div>
                 </div>
                 <div className="form-group">
@@ -156,7 +166,6 @@ class AddUser extends Component {
                         (e) => {
                             e.preventDefault();
                             this.onSaveHandler();
-                            this.open()
                         }
                     }>Save</Button>
             </form>

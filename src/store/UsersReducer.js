@@ -6,14 +6,16 @@ const initialState =
         id: 1,
         name: "ahmed",
         email: "a@test.com",
+        password:'111111',
         phone: 4353453543,
         status: "Active",
-        role: "User"
+        role: "Admin"
     },
     {
         name: "omar",
         id: 2,
         email: "a@test.com",
+        password:'222222',
         phone: 372636722,
         status: "Active",
         role: "User"
@@ -22,6 +24,7 @@ const initialState =
         name: "ali",
         id: 3,
         email: "c@test.com",
+        password:'333333',
         phone: 82736,
         status: "Soft_Deleted",
         role: "User"

@@ -6,6 +6,8 @@ const validate = (id, value) => {
             return (!validator.isEmpty(value) && value.length <= 10)
         case 'email':
             return (validator.isEmail(value))
+        case 'password':
+            return (!validator.isEmpty(value))
         case 'phone':
             return (validator.isMobilePhone(value))
         case 'status':
